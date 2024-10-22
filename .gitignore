@@ -1,3 +1,9 @@
 venv
 node_modules
 package-lock.json
+.DS_Store
+*output_charts/
+*data/
+*convert/
+__pycache__/
+*.ipynb_checkpoints/
