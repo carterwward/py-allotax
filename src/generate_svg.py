@@ -43,7 +43,7 @@ def generate_svg(js_file_1: str, js_file_2: str, output_file: str, alpha: str):
         file.write('module.exports = { data1, data2, alpha };')
 
     # Command to run the JavaScript file using Node.js
-    command = ['node', 'generate_svg_d3_class.js', temp_file_path]
+    command = ['node', 'generate_svg_minimum.js', temp_file_path]
 
     # Run the JS file and capture the output
     result = subprocess.run(command, capture_output=True, text=True)
