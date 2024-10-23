@@ -1,4 +1,4 @@
-async function createAllotaxChart(data_1, data_2, alpha, svg) {
+async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
     // Dynamically import the allotaxonometer module
     const { mixedElems, DiamondChart, WordShiftChart, BalanceChart, LegendChart } = await import('allotaxonometer');
 
@@ -10,11 +10,21 @@ async function createAllotaxChart(data_1, data_2, alpha, svg) {
     const diamond_dat = dat.counts;
     const wordshift = me_class.wordShift(dat);
     const balance_dat = me_class.balanceDat();
+
+    // Am I missing some canvas settings here?
+      // ADDED
+    // Define dimensions and margins
+    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+
+    // Create the <g> element for the charts
+    const g = passed_svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
     // Plot
-    DiamondChart(diamond_dat, svg);
-    WordShiftChart(wordshift, { height: 670 }, svg);
-    BalanceChart(balance_dat, svg);
-    LegendChart(diamond_dat, svg);
+    DiamondChart(diamond_dat, g);
+    WordShiftChart(wordshift, { }, g);
+    BalanceChart(balance_dat, { }, g);
+    LegendChart(diamond_dat, { }, g);
 }
 
 module.exports = { createAllotaxChart };
