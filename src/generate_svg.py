@@ -1,4 +1,9 @@
-"""Functions to generate allotaxonometer SVG using D3.js."""
+"""Functions to generate allotaxonometer SVG using D3.js.
+
+Notes:
+As a test, run in terminal:
+python3 generate_svg.py data/boys_2022.js data/boys_2023.js output_charts/test2.svg "0.17"
+"""
 
 import argparse
 import json
