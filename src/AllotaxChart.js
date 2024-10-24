@@ -11,18 +11,9 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
     const wordshift = me_class.wordShift(dat);
     const balance_dat = me_class.balanceDat();
 
-    // Am I missing some canvas settings here?
-      // ADDED
-    // Define dimensions and margins
-    // const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-
-    // Create the <g> element for the charts
-    // const g = passed_svg .append('g')
-        //.attr('transform', `translate(${margin.left},${margin.top})`);
-
     // Plot
     DiamondChart(diamond_dat, passed_svg.diamond_svg);
-    WordShiftChart(wordshift, { }, passed_svg.wordshift_svg);
+    WordShiftChart(wordshift, { height: 670 }, passed_svg.wordshift_svg);
     BalanceChart(balance_dat, { }, passed_svg.balance_svg);
     LegendChart(diamond_dat, { }, passed_svg.legend_svg);
 }

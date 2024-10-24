@@ -2,7 +2,7 @@
 
 Notes:
 As a test, run in terminal:
-python3 generate_svg.py data/boys_2022.js data/boys_2023.js output_charts/test2.svg "0.17"
+python3 generate_svg.py data/boys_2022.js data/boys_2023.js output_charts/test2.html "0.17"
 """
 
 import argparse
@@ -50,10 +50,10 @@ def generate_svg(js_file_1: str, js_file_2: str, output_file: str, alpha: str):
 
     # Check if the command was successful
     if result.returncode == 0:
-        # Save the SVG output to a file
+        # Save the HTML output to a file
         with open(output_file, 'w') as file:
             file.write(result.stdout)
-        print(f"SVG saved to {output_file}")
+        print(f"HTML saved to {output_file}")
     else:
         print(f"Error: {result.stderr}")
 
