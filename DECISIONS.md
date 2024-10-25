@@ -30,6 +30,12 @@ Regarding the ideation below, we ended up going with ...
         - Pro: this would make the environment easy and consistent across all users. Users would only need to worry about a Docker installation.
             - Good option down the line.
         - Con: this is a current barrier to devs (learning and time to commit to this project)--but otherwise surmountable on the learning front.
+- HTML to image options
+    1. We can do this in JS or Python, but Python gives the user more control over format, and we're gearing design toward analysis in Python.
+    1. Many Python libraries can do this: `imgkit`, `html2image`, `selenium`, `pyppeteer`.
+        - `wkhtmltopdf` is a common dependency multiple Python libraries wrap that homebrew is deprecating--this could prevent a future difficulty for install. `imgkit` is a wrapper around this library.
+        - `pyhtml2pdf` uses `selenium` and `ghostscript` to create a headless Chrome browser--some dependencies but seems reliable. Ability to install with these various dependencies will need to be tested.
+    1. A good JS option is `html2canvas` but also requires a headless browser and takes away some ease of use.
 
 ## Future improvements (TODOs):
 1. Continue improving the ecosystem dependencies to streamline ease of installation.
