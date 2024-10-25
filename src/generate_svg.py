@@ -4,11 +4,14 @@ Notes:
 As a test, run in terminal:
 python3 generate_svg.py data/boys_2022.js data/boys_2023.js output_charts/test2.html "0.17"
 """
+import os
 
 import argparse
 import json
 import subprocess
 import tempfile
+from pyhtml2pdf import converter
+
 
 from utils import strip_export_statement
 
@@ -19,7 +22,7 @@ def generate_svg(js_file_1: str, js_file_2: str, output_file: str, alpha: str):
     Args:
         js_file_1: Path to the first JS data file.
         js_file_2: Path to the second JS data file.
-        output_file: Path to save the output SVG file.
+        output_file: Path to save the output HTML file.
         alpha: Alpha value for allotaxChart.
     """
     # Read in .js data files as text
@@ -51,9 +54,17 @@ def generate_svg(js_file_1: str, js_file_2: str, output_file: str, alpha: str):
     # Check if the command was successful
     if result.returncode == 0:
         # Save the HTML output to a file
+        # TODO: figure out if the inherent dependencies in this route will work.
         with open(output_file, 'w') as file:
             file.write(result.stdout)
         print(f"HTML saved to {output_file}")
+
+        path = os.path.abspath(f'{output_file}')
+        converter.convert(
+            f'file:///{path}', 'sample.pdf',
+            print_options={"landscape": True, "scale": 0.8, "marginLeft":0}
+        )
+
     else:
         print(f"Error: {result.stderr}")
 

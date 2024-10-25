@@ -31,6 +31,8 @@ const { createAllotaxChart } = require('./AllotaxChart.js');
 
   // Serialize the SVG to a string (other methods don't provide full HTML)
   const svgString = dom.serialize();
+  // save the HTML as a svg after converting it to a canvas (html2canvas)
+
 
   // Print the SVG string to the console
   console.log(svgString);
