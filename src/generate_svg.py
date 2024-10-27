@@ -10,33 +10,7 @@ import os
 import subprocess
 import tempfile
 
-import weasyprint
-from pyhtml2pdf import converter
-
-from utils import strip_export_statement
-
-
-def convert_html_to_pdf(tool: str, html_file_path: str, output_file_path: str) -> None:
-    """Convert HTML to PDF using the specified tool."""
-    path = os.path.abspath(html_file_path)
-    match tool:
-        case 'pyhtml2pdf':
-            converter.convert(
-                f'file:///{path}', output_file_path,
-                print_options={"landscape": True, "scale": 0.8, "marginLeft": 0}
-            )
-            print("PDF conversion complete using pyhtml2pdf.")
-        # TODO: needs some CSS tinkering to get the layout right
-        # case 'weasyprint':
-        #     css = weasyprint.CSS(string='''
-        #         @page {
-        #             size: A4 landscape;
-        #         }
-        #     ''')
-        #     weasyprint.HTML(f'file://{path}').write_pdf(output_file_path, stylesheets=[css])
-        #     print("PDF conversion complete using WeasyPrint.")
-        case _:
-            print("Invalid tool selected.")
+from utils import convert_html_to_pdf, strip_export_statement
 
 
 def generate_svg(js_file_1: str, js_file_2: str, output_file: str, alpha: str) -> None:
@@ -81,7 +55,9 @@ def generate_svg(js_file_1: str, js_file_2: str, output_file: str, alpha: str) -
             file.write(result.stdout)
         print(f"HTML saved to {output_file}")
         # Convert the HTML to PDF
-        convert_html_to_pdf('pyhtml2pdf', output_file, 'output_charts/allo_pdf.pdf')
+        # strip .html from output_file
+        file_name = output_file.rsplit('.', 1)[0]
+        convert_html_to_pdf('pyhtml2pdf', output_file, f'{file_name}.pdf')
 
     else:
         print(f"Error: {result.stderr}")
