@@ -16,7 +16,7 @@
     ```shell
     git clone https://github.com/jstonge/mini_allotax.git &&
     cd mini_allotax &&
-    npm install allotaxonometer@1.1.9 d3 jsdom
+    npm install jstonge/allotaxonometer#py-allotax-experimental
     ```
 
 ## Usage instructions
@@ -29,5 +29,5 @@
 1. If working in a notebook or scripting, you can import the function and use it directly:
     ```python
     from generate_svg import generate_svg
-    generate_svg("data/data1.js", "data/data2.js", "output_charts/output.svg", "alpha_as_str")
+    generate_svg("data/data1.js", "data/data2.js", "output_charts/output.html", "alpha_as_str")
     ```
