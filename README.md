@@ -25,6 +25,7 @@
 1. Add your 2 system's files to the `data` folder. You need 2 `data.js` files, one for each system.
 1. Run the following to test that the library works for you. Note `alpha` needs to be passed as a string. If using`infinity`, pass `"inf"`.
     ```shell
+    cd src &&
     python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17"
     ```
 Verify this test against `data/sample.pdf`.
