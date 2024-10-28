@@ -37,4 +37,4 @@ Regarding the ideation below, we ended up going with ...
 1. Continue improving the ecosystem dependencies to streamline ease of installation.
 1. Extend methods to include the ability to get computed ranks and other variables of interest (data that is generated for the creation of the graph but not returned anywhere).
 1. If applicable based on current decision, incorporate improvements to the main `npm` library version.
-1. Add a script to parse data into the required format (see `data/test_data` for required format).
+1. Write up some examples, including a use case for big data using multiprocessing locally. 

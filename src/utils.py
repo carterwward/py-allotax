@@ -1,17 +1,17 @@
-"""Convert data files from the csv format to the js format.
+"""Convert data files from csv or js format to json.
 
-Note: CSV file must be in the final format you would use in the allotax webapp
+Note:
+- CSV file must be in the final format you would use in the allotax webapp
 with columns of these names and ordering: ['types', 'counts', 'total_unique', 'probs']
 """
-
-import os
-import argparse
 import json
-# import logging
+import os
 
 import pandas as pd
-# import weasyprint
 from pyhtml2pdf import converter
+
+# import logging
+# import weasyprint
 
 # Set up logging for weasyprint
 # logging.basicConfig(level=logging.DEBUG, filename='weasyprint.log', filemode='w',
@@ -42,20 +42,27 @@ def convert_html_to_pdf(tool: str, html_file_path: str, output_file_path: str) -
         case _:
             print("Invalid tool selected.")
 
-# TODO: make obselete after full implementation
-# TODO: add function converting from any of csv, json, or js to JSON (?)
+
+# Helper functions to convert data files among 3 formats: csv, json, js
+
+
 def strip_export_statement(js_content):
     """Strip the 'export const data =' part from the JS content."""
     return js_content.replace('export const data =', '').strip()
 
 
-# TODO change this to hold 2 datafiles in a 'convert' folder, then just run the script on the folder and save both outputs to the same .js file
-def convert_csv_data(desired_name: str, path1: str, path2: str) -> None:
-    """Convert 2 data files from the csv format to the js format."""
+def convert_csv_data(desired_format: str, path1: str, path2: str) -> None:
+    """Convert 2 data files from .csv format to .json or .js format.
+    Args:
+        desired_format: The format to convert to ('json' or 'js').
+        path1: Path to the first CSV file (with extension).
+        path2: Path to the second CSV file (with extension).
+    """
+    extensions = {'json': '.json', 'js': '.js'}  # Supported formats
 
     for path in [path1, path2]:
         # Load the data
-        df = pd.read_csv(f'{path}.csv')
+        df = pd.read_csv(f'{path}')
         # change col name total_unique to totalunique
         df.rename(columns={'total_unique': 'totalunique'}, inplace=True)
         df['probs'] = df['probs'].round(4)
@@ -65,20 +72,35 @@ def convert_csv_data(desired_name: str, path1: str, path2: str) -> None:
         # Convert the data to a dictionary
         data = df.to_dict(orient='records')
 
-        # Save both datasets as variables to a js file
-        with open(f'data/{desired_name}.js', 'w', encoding='utf-8') as f:
-            f.write(f'export const data = {json.dumps(data)};')
+        # Save both datasets as variables to a json file
+        f_type = extensions[desired_format]
+        # Re-use filename without extension (strip .csv)
+        f_name = os.path.basename(path).rsplit('.', 1)[0]
+        with open(f'data/{f_name}{f_type}', 'w', encoding='utf-8') as f:
+            if desired_format == 'js':
+                f.write(f'export const data = {json.dumps(data)};')
+            else:
+                json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Convert CSV to JS.')
-    parser.add_argument('desired_name', type=str, help='The desired name for the output JS file')
-    parser.add_argument('path1', type=str, help='The path to the CSV for system 1')
-    parser.add_argument('path2', type=str, help='The path to the CSV for system 2')
+def convert_js_data(desired_format: str, path1: str, path2: str) -> None:
+    """Convert 2 data files from .js format to .csv or .json format.
+    Args:
+        desired_format: The format to convert to ('csv' or 'json').
+        path1: Path to the first .js file (with extension).
+        path2: Path to the second .js file (with extension).
+    """
+    for path in [path1, path2]:
+        # Re-use filename without extension (strip .js)
+        f_name = os.path.basename(path).rsplit('.', 1)[0]
 
-    args = parser.parse_args()
-
-    convert_csv_data(args.desired_name, args.path1, args.path2)
-
-    # RUN USING THIS IN TERMINAL:
-    # python convert_data.py output_name input_file1.csv input_file2.csv
+        # Load the data
+        with open(f'{path}', 'r') as f:
+            js_content = f.read()
+            data = json.loads(strip_export_statement(js_content))
+            if desired_format == 'csv':
+                df = pd.DataFrame(data)
+                df.to_csv(f'data/{f_name}.csv', index=False)
+            else:
+                with open(f'data/{f_name}.json', 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=4)
