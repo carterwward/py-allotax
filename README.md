@@ -25,7 +25,7 @@ Here is the link for the [Chromium download](https://www.chromium.org/getting-in
 ## Usage instructions
 1. Verify your data is in the required format by seeing the example in `data/test_data`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
-1. Add your 2 system's files to the `data` folder. You need 2 `data.js` files, one for each system.
+1. Add your 2 system's files to the `data` folder. You need 2 `data.json` files, one for each system.
 1. Run the following to test that the library works for you. Note `alpha` needs to be passed as a string. If using`infinity`, pass `"inf"`.
     ```shell
     cd src &&
