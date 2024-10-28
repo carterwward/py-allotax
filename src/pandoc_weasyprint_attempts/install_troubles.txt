@@ -1,0 +1,10 @@
+PANDOC INSTALL
+- Install latex (I can’t remember if I did pip or brew. Try pip first)
+- brew install pandoc
+- brew install --cask basictex
+- DO NOT DO HOMEBREW. Texlive should be on system (brew install texlive)
+- tlmgr update —self
+- tlmgr update —all
+- tlmgr install svg
+- sudo tlmgr install catchfile transparent
+- brew install --cask inkscape
