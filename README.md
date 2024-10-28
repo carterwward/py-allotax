@@ -3,21 +3,24 @@
 ## Installation steps
 
 1. If environment install is needed (never used or installed `npm`, `nvm`, `node`):
-    - [steps to install `nvm`](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating). `nvm` is a node version manager that streamlines installing the other 2.
+    - Here are the recommended [steps to install `nvm`](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating). `nvm` is a node version manager that streamlines installing the other 2.
     - If you have `nvm`, you can do:
         ```shell
         nvm install --lts
         ```
     to install the latest of both.
     - Otherwise: [steps to install `node` and `npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+1. One package depends on having Chrome (brower) or Chromium (browser driver) installed. If you have Chrome installed, you can skip this step. Otherwise, install Chrome or Chromium.
+Here is the link for the [Chromium download](https://www.chromium.org/getting-involved/download-chromium/).
 
-
-1. Install the following packages:
+1. Install the following:
     ```shell
     git clone https://github.com/carterwward/py-allotax.git &&
     cd py-allotax &&
-    npm install jstonge/allotaxonometer#py-allotax-experimental
+    npm install d3 jsdom jstonge/allotaxonometer#py-allotax-experimental &&
+    pip install pandas pyhtml2pdf
     ```
+(*note: we are in the process of replacing the HTML->PDF generation method to remove `pyhtml2pdf` dependency*)
 
 ## Usage instructions
 1. Verify your data is in the required format by seeing the example in `data/test_data`.

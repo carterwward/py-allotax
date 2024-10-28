@@ -1,7 +1,15 @@
 # Package decisions
 
 ## Decision
-Regarding the ideation below, we ended up going with ...
+Regarding the ideation below, we ended up going with the following workflow using a mixed Python and JavaScript approach:
+1. User provides 2 datasets and alpha.
+1. In JS, create a DOM.
+1. Load the allotaxonometer plot template into the DOM.
+1. Calculate data for the plot and add that data to each plot's svg.
+1. Serialize results to a HTML, save file.
+1. Intercept this result in Python with `subprocess`.
+1. Library generates a static image file from the HTML.
+
 
 ## Design
 
@@ -36,5 +44,4 @@ Regarding the ideation below, we ended up going with ...
 ## Future improvements (TODOs):
 1. Continue improving the ecosystem dependencies to streamline ease of installation.
 1. Extend methods to include the ability to get computed ranks and other variables of interest (data that is generated for the creation of the graph but not returned anywhere).
-1. If applicable based on current decision, incorporate improvements to the main `npm` library version.
-1. Write up some examples, including a use case for big data using multiprocessing locally. 
+1. Write up some examples, including a use case for big data using multiprocessing locally.

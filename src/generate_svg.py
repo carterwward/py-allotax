@@ -21,7 +21,7 @@ def generate_svg(json_file_1: str, json_file_2: str, output_file: str, alpha: st
         output_file: Path to save the output pdf file.
         alpha: Alpha value for allotaxChart.
     Notes:
-        - See utils.py for helpers to convert .csv or .js to .json.
+        See utils.py for helpers to convert .csv or .js to .json.
     """
     # Read in .json data files as text
     with open(json_file_1, 'r') as file:
