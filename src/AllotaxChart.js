@@ -5,7 +5,7 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
     const { combElems, RTD, myDiamond, wordShift_dat, DiamondChart, WordShiftChart, BalanceChart, LegendChart, balanceDat } = await import('allotaxonometer');
     
     // Combining both systems in mixedElems class
-    
+
     const me = combElems(data_1, data_2);
     const rtd = RTD(me, alpha);
     

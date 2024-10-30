@@ -19,12 +19,15 @@ const { createAllotaxChart } = require('./AllotaxChart.js');
   const tempFilePath = process.argv[2];
   // Use require to load the JavaScript module
   const { data1, data2, alpha } = require(tempFilePath);
-
+  
   // Create a D3.js SVG visualization for each plot
   const diamond_svg = d3.select(".diamond_wordshift #diamondplot svg");
   const wordshift_svg = d3.select(".diamond_wordshift #wordshift svg");
   const legend_svg = d3.select(".legend_balance #legend svg");
   const balance_svg = d3.select(".legend_balance #balance svg");
+
+  d3.select("#title1").text("Title 1");
+  d3.select("#title2").text("Title 2");
 
   // Create the allotaxChart instance with the provided data and arguments
   await createAllotaxChart(data1, data2, alpha, { diamond_svg, wordshift_svg, legend_svg, balance_svg });
