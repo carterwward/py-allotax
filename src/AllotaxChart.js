@@ -14,7 +14,7 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
     const diamond_dat = dat.counts;
     const barData = wordShift_dat(me, dat).slice(0, 30);
 
-    max_shift = d3.max(barData, d => Math.abs(d.metric))
+    const max_shift = d3.max(barData, d => Math.abs(d.metric))
 
     // Plot
     DiamondChart(diamond_dat, alpha, passed_svg.diamond_svg);
