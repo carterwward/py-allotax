@@ -60,7 +60,7 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
       }
 
     // Plot
-    DiamondChart(diamond_dat, deltamatrix, passed_svg.diamond_svg);
+    DiamondChart(diamond_dat, deltamatrix, alpha, maxlog10, passed_svg.diamond_svg);
 
     WordShiftChart(barData, {  
         x: d => d.metric,
