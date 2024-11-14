@@ -12,7 +12,10 @@ from pyhtml2pdf import converter
 
 
 def convert_html_to_pdf(tool: str, html_file_path: str, output_file_path: str) -> None:
-    """Convert HTML to PDF using the specified tool."""
+    """Convert HTML to PDF using the specified tool.
+
+    Note: the match-case structure sets up tool extensibility.
+    """
     path = os.path.abspath(html_file_path)
     match tool:
         case 'pyhtml2pdf':
