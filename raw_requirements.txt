@@ -1,0 +1,17 @@
+- JavaScript
+    - nvm@0.40.1
+    - npm@10.9.0
+    - node@22.11.0
+    - @ungap/structured-clone@1.2.0
+    # - canvas@2.11.2 -- FRESH ENVIRON USER TEST TO SEE IF REQUIRED
+        # - https://stackoverflow.com/questions/73297594/cannot-install-canvas-on-npm
+        #     - MacOS may require
+        #         - brew install pkg-config cairo pango libpng jpeg giflib librsvg
+    - d3@7.9.0
+    - jsdom@25.0.1
+- Python
+    - pandas>=2.2.1
+    - pyhtml2pdf>=0.0.7
+- System
+    # - Ghostscript -- FRESH ENVIRON USER TEST TO SEE IF REQUIRED
+    - Chrome browser or Chromium driver
