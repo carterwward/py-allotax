@@ -5,7 +5,7 @@ As a test, run in terminal:
 python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17"
 
 If you only want the html file, not the pdf, run:
- python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17" --desired_format "html"
+python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17" --desired_format "html"
 """
 
 import argparse

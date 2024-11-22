@@ -37,6 +37,7 @@ Here is the link for the [Chromium download](https://www.chromium.org/getting-in
 - Once you set up your ecosystem, you will see `node_modules/`, which will contain the `npm` packages.
 
 ## Usage instructions
+*(also see examples.ipynb)*
 1. Verify your data is in the required format (`.json`) by seeing examples in `convert/test_data`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
 1. Add your 2 system's files. You need 2 `data.json` files, one for each system.
