@@ -2,20 +2,6 @@
 
 The `py-allotax` implements a python interface to the `allotaxonometer` library. The tool here provides a way for users to input data and arguments and receive back a saved plot! The tool is designed to be used in a command line or in a python notebook in a few lines of code (see usage instructions at the bottom).
 
-## Structure
-- inside `src`:
-    - <u>`generate_svg.py` is the main script to generate the pdf. You can run this from command line or in a notebook.</u>
-    - `AllotaxChart.js` and `generate_svg_minimum.js` are the JavaScript files calculating the data and generating the plot in HTML before piping when `generate_svg.py` is run.
-    - `utils.py` contains helper functions to convert your data files between `csv`, `json`, and `js` formats if needed.
-    - `convert/`: test data
-    - `data/`: where you can place your data
-    - `output_charts/`: where the output html and pdf will be saved (see output examples here)
-- `allo_diagram.drawio` is a diagram of the allotaxonometer ecosystem.
-- `raw_requirements.txt` contains the raw requirements for the project which will eventually be used for packaging.
-- Once you set up your ecosystem, you will see `node_modules/`, which will contain the `npm` packages.
-
-
-
 ## Installation steps
 
 1. If JavaScript tool installs are needed (never used or installed `npm`, `nvm`, `node`):
@@ -37,6 +23,18 @@ Here is the link for the [Chromium download](https://www.chromium.org/getting-in
     pip install pandas pyhtml2pdf
     ```
 (*note: we will eventually package this repo and streamline installation. See `raw_requirements.txt` for versions and notes if trouble abounds.*)
+
+## Structure
+- inside `src`:
+    - <u>`generate_svg.py` is the main script to generate the pdf. You can run this from command line or in a notebook.</u>
+    - `AllotaxChart.js` and `generate_svg_minimum.js` are the JavaScript files calculating the data and generating the plot in HTML before piping when `generate_svg.py` is run.
+    - `utils.py` contains helper functions to convert your data files between `csv`, `json`, and `js` formats if needed.
+    - `convert/`: test data
+    - `data/`: where you can place your data
+    - `output_charts/`: where the output html and pdf will be saved (see output examples here)
+- `allo_diagram.drawio` is a diagram of the allotaxonometer ecosystem.
+- `raw_requirements.txt` contains the raw requirements for the project which will eventually be used for packaging.
+- Once you set up your ecosystem, you will see `node_modules/`, which will contain the `npm` packages.
 
 ## Usage instructions
 1. Verify your data is in the required format (`.json`) by seeing examples in `convert/test_data`.
