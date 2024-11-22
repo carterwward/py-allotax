@@ -4,6 +4,7 @@ Note:
 - CSV file must be in the final format you would use in the allotax webapp
 with columns of these names and ordering: ['types', 'counts', 'total_unique', 'probs']
 """
+
 import json
 import os
 
@@ -18,10 +19,16 @@ def convert_html_to_pdf(tool: str, html_file_path: str, output_file_path: str) -
     """
     path = os.path.abspath(html_file_path)
     match tool:
-        case 'pyhtml2pdf':
+        case "pyhtml2pdf":
             converter.convert(
-                f'file:///{path}', output_file_path,
-                print_options={"landscape": True, "scale": 0.8, "marginLeft": 0, "pageRanges": "1"}
+                f"file:///{path}",
+                output_file_path,
+                print_options={
+                    "landscape": True,
+                    "scale": 0.8,
+                    "marginLeft": 0,
+                    "pageRanges": "1",
+                },
             )
             print("PDF conversion complete using pyhtml2pdf.")
         # case: implement other method for HTML conversion
@@ -34,7 +41,7 @@ def convert_html_to_pdf(tool: str, html_file_path: str, output_file_path: str) -
 
 def strip_export_statement(js_content):
     """Strip the 'export const data =' part from the JS content."""
-    return js_content.replace('export const data =', '').strip()
+    return js_content.replace("export const data =", "").strip()
 
 
 def convert_csv_data(desired_format: str, path1: str, path2: str) -> None:
@@ -44,27 +51,27 @@ def convert_csv_data(desired_format: str, path1: str, path2: str) -> None:
         path1: Path to the first CSV file (with extension).
         path2: Path to the second CSV file (with extension).
     """
-    extensions = {'json': '.json', 'js': '.js'}  # Supported formats
+    extensions = {"json": ".json", "js": ".js"}  # Supported formats
 
     for path in [path1, path2]:
         # Load the data
-        df = pd.read_csv(f'{path}')
+        df = pd.read_csv(f"{path}")
         # change col name total_unique to totalunique
-        df.rename(columns={'total_unique': 'totalunique'}, inplace=True)
-        df['probs'] = df['probs'].round(4)
+        df.rename(columns={"total_unique": "totalunique"}, inplace=True)
+        df["probs"] = df["probs"].round(4)
         # re-order cols to types, counts, totalunique, probs
-        df = df[['types', 'counts', 'totalunique', 'probs']]
+        df = df[["types", "counts", "totalunique", "probs"]]
 
         # Convert the data to a dictionary
-        data = df.to_dict(orient='records')
+        data = df.to_dict(orient="records")
 
         # Save both datasets as variables to a json file
         f_type = extensions[desired_format]
         # Re-use filename without extension (strip .csv)
-        f_name = os.path.basename(path).rsplit('.', 1)[0]
-        with open(f'data/{f_name}{f_type}', 'w', encoding='utf-8') as f:
-            if desired_format == 'js':
-                f.write(f'export const data = {json.dumps(data)};')
+        f_name = os.path.basename(path).rsplit(".", 1)[0]
+        with open(f"data/{f_name}{f_type}", "w", encoding="utf-8") as f:
+            if desired_format == "js":
+                f.write(f"export const data = {json.dumps(data)};")
             else:
                 json.dump(data, f, ensure_ascii=False, indent=4)
 
@@ -78,15 +85,36 @@ def convert_js_data(desired_format: str, path1: str, path2: str) -> None:
     """
     for path in [path1, path2]:
         # Re-use filename without extension (strip .js)
-        f_name = os.path.basename(path).rsplit('.', 1)[0]
+        f_name = os.path.basename(path).rsplit(".", 1)[0]
 
         # Load the data
-        with open(f'{path}', 'r') as f:
+        with open(f"{path}", "r") as f:
             js_content = f.read()
             data = json.loads(strip_export_statement(js_content))
-            if desired_format == 'csv':
+            if desired_format == "csv":
                 df = pd.DataFrame(data)
-                df.to_csv(f'data/{f_name}.csv', index=False)
+                df.to_csv(f"data/{f_name}.csv", index=False)
             else:
-                with open(f'data/{f_name}.json', 'w', encoding='utf-8') as f:
+                with open(f"data/{f_name}.json", "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False, indent=4)
+
+
+def verify_input_data(datafile_1, datafile_2) -> None:
+    """Verifies the format of provided files match the required json format with
+    keys: ['types', 'counts', 'totalunique', 'probs'].
+    """
+    for file in [datafile_1, datafile_2]:
+        # verify the data opens (otherwise return note about invalid json structure)
+        try:
+            with open(file, "r") as f:
+                data = json.loads(f.read())
+        except json.JSONDecodeError:
+            raise ValueError(
+                f"Invalid JSON structure in {file}. File should be"
+                + "a .json wherein the data is a list of dictionaries."
+            )
+        # verify the data has the required keys
+        if not all(k in data[0] for k in ["types", "counts", "totalunique", "probs"]):
+            raise ValueError(
+                f"Data in {file} does not match the required format: ['types', 'counts', 'totalunique', 'probs']"
+            )

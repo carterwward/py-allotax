@@ -13,7 +13,7 @@ import json
 import subprocess
 import tempfile
 
-from utils import convert_html_to_pdf
+from utils import convert_html_to_pdf, verify_input_data
 
 
 def generate_svg(
@@ -35,7 +35,8 @@ def generate_svg(
     Notes:
         See utils.py for helpers to convert .csv or .js to .json.
     """
-    # Read in .json data files as text
+    # Verify the input data and read in .json data files as text
+    verify_input_data(json_file_1, json_file_2)
     with open(json_file_1, "r") as file:
         data1_json = json.loads(file.read())
     with open(json_file_2, "r") as file:

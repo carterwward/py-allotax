@@ -38,7 +38,7 @@ Here is the link for the [Chromium download](https://www.chromium.org/getting-in
 
 ## Usage instructions
 *(also see examples.ipynb)*
-1. Verify your data is in the required format (`.json`) by seeing examples in `convert/test_data`.
+1. Verify your data is in the required format (`.json`) by seeing json examples in `convert/`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
 1. Add your 2 system's files. You need 2 `data.json` files, one for each system.
 1. Run the following to test that the library works for you. Note `alpha` needs to be passed as a string. If using`infinity`, pass `"inf"`.
