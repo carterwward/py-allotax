@@ -1,5 +1,5 @@
 
-async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
+async function createAllotaxChart(data_1, data_2, alpha, title1, title2, passed_svg) {
     // Dynamically import the allotaxonometer module
     const d3 = await import('d3');
 
@@ -18,7 +18,7 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
     const maxlog10 = Math.ceil(d3.max([Math.log10(d3.max(me[0].ranks)), Math.log10(d3.max(me[1].ranks))]))
     
     // Plot
-    DiamondChart(diamond_dat, alpha, maxlog10, rtd.normalization, passed_svg.diamond_svg);
+    DiamondChart(diamond_dat, alpha, title1, title2, maxlog10, rtd.normalization, passed_svg.diamond_svg);
 
     WordShiftChart(barData, {  
         x: d => d.metric,
@@ -29,17 +29,18 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
         yPadding: 0.2,
         height: 680,
         xLabel: "← System 1 · Divergence contribution · System 2 →",
-        colors: ["lightgrey", "lightblue"] }, passed_svg.wordshift_svg)
+        colors: ["lightgrey", "lightblue"] 
+    }, passed_svg.wordshift_svg)
     
     BalanceChart(balanceDat(data_1, data_2), {
         x: d => d.frequency,
         y: d => d.y_coord,
         xFormat: "%",
-        xDomain: [-1, 1], // [xmin, xmax]
+        xDomain: [-1, 1],
         xLabel: "",
-        width: 300,
+        width: 200,
         yPadding: 0.5,
-        colors: ["lightgrey", "lightblue"]
+        colors: ["lightgrey", "lightblue"],
     }, passed_svg.balance_svg);
 
     const N_CATEGO = 20
@@ -48,9 +49,9 @@ async function createAllotaxChart(data_1, data_2, alpha, passed_svg) {
     
     LegendChart(color, {
         tickSize: 0,
-        max_count_log: Math.ceil(Math.log10(d3.max(diamond_dat, d => d.value)))+1,
-        marginTop:11,
-        width: 370
+        max_count_log: Math.ceil(Math.log10(d3.max(diamond_dat, d => d.value))) + 1,
+        marginTop: 13,
+        width: 300,
       }, passed_svg.legend_svg);
 }
 
