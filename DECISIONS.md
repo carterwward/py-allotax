@@ -40,10 +40,7 @@ Regarding the ideation below, we ended up going with the following workflow usin
 
  ### HTML to image options
 
- This has to be lightweight; many options open a headless browser reliant on a browser driver (e.g. selenium uses the Chrome driver) which takes a few seconds per conversion (see posted issue for follow-up on this separately). We explored numerous options that do not seem possible, so this area remains a task anyone is free to take on. Specifically, we tried `pandoc`, `weasyprint`, node.js `html-to-pdf`, and a less restrictive DOM `linkedom`.
- - `pandoc`: would have been a good option but had many texlive (latex universe) and system dependencies that ultimately did not work out.
- - `weasyprint`: we think it could work but may require some tinkering with the CSS elements in the HTML plot template. Library logging showed weasyprint fails to render SVG image and an option wasn't apparent.
- - `linkedom`: As with the current DOM (`jsdom`), a richer browser was required (headless browser to render styles and flexboxes), making `html-to-pdf` a non-option.
+ See [this issue](https://github.com/carterwward/py-allotax/issues/3) for details on options explored so far.
 
 ## Future improvements (TODOs):
 1. Continue improving the ecosystem dependencies (or automation of set-up) to streamline ease of installation.
