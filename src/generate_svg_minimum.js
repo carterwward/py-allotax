@@ -1,6 +1,6 @@
-const fs = require('fs');
-const { JSDOM } = require('jsdom');
-const { createAllotaxChart } = require('./AllotaxChart.js');
+import fs from 'fs';
+import { JSDOM } from 'jsdom';
+import createAllotaxChart from './AllotaxChart.js';
 
 (async () => {
   // Dynamically import d3
@@ -18,7 +18,8 @@ const { createAllotaxChart } = require('./AllotaxChart.js');
   // Accept the path to the temporary file from the command line arguments
   const tempFilePath = process.argv[2];
   // Use require to load the JavaScript module
-  const { data1, data2, alpha, title1, title2 } = require(tempFilePath);
+  const tempData = await import(tempFilePath);
+  const { data1, data2, alpha, title1, title2 } = tempData;
   
   // Create a D3.js SVG visualization for each plot
   const diamond_svg = d3.select("#diamondplot svg");

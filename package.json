@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@ungap/structured-clone": "^1.2.0",
     "allotaxonometer": "github:jstonge/allotaxonometer#jso-contours",
