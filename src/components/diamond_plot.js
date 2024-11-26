@@ -1,8 +1,15 @@
 import * as d3 from "d3";
 
+import { alpha_norm_type2, rin } from 'allotaxonometer';
 
-export default function DiamondChart(dat, alpha, title1, title2, maxlog10, divnorm, {passed_svg} = {}) {
-  
+export default function DiamondChart(dat, alpha, divnorm, { 
+  title,
+  maxlog10,
+  DiamondHeight = 600,
+  marginInner = 160,
+  marginDiamond = 40,
+  passed_svg
+ } = {}) {
   
   const draw_polygon = (g, tri_coords, bg_color) => g
         .append("polygon")
@@ -12,12 +19,10 @@ export default function DiamondChart(dat, alpha, title1, title2, maxlog10, divno
          .attr("stroke-width", 1)
          .attr("points", tri_coords)
   
-  let DiamondHeight = 600;
-  const margin = ({ inner: 160, diamond: 40 })
-  const innerHeight = DiamondHeight - margin.inner;   
-  const diamondHeight = innerHeight - margin.diamond;
+  
+  const innerHeight = DiamondHeight - marginInner;   
+  const diamondHeight = innerHeight - marginDiamond;
      
-  const max_rank_raw = d3.range(d3.max(dat, d=>d.x1))
   const ncells = d3.max(dat, d => d.x1)
   const max_rank = d3.max(dat, (d) => d.rank_L[1]); 
   const rounded_max_rank = 10**Math.ceil(Math.max(Math.log10(max_rank)))
@@ -39,11 +44,10 @@ export default function DiamondChart(dat, alpha, title1, title2, maxlog10, divno
   // SVG container and transformations
   if (passed_svg === undefined) passed_svg = d3.create("svg");
 
-  const g = passed_svg.attr("id", "myGraph").style("overflow", "visible")
+  const g = passed_svg.style("overflow", "visible")
        .attr('transform', `scale (-1,1) rotate(45) translate(${innerHeight/4},${innerHeight/4})`)
        .attr('height', DiamondHeight)
        .attr('width', DiamondHeight);
-  
 
     // AXIS ----------------------------------
 
@@ -123,7 +127,7 @@ const xAxisLab = (g, x, text, dy, alpha) => g
       .call(xAxis, logScale)
       .call(xAxisLab, innerHeight/2, "Rank r", 45, 0.8)
       .call(xAxisLab, innerHeight/2, "for", 63, 0.8)
-      .call(xAxisLab, innerHeight/2, title2, 80, 0.8)
+      .call(xAxisLab, innerHeight/2, title[1], 80, 0.8)
       .call(xAxisLab, innerHeight-40, "more →", 60, 0.8)
       .call(xAxisLab, innerHeight-40, "frequent", 75, 0.8)
       .call(xAxisLab, 40, "← more", 60, 0.8)
@@ -134,7 +138,7 @@ const xAxisLab = (g, x, text, dy, alpha) => g
       .call(yAxis, logScale)
       .call(yAxisLab, innerHeight/2, "Rank r", 45, .7)
       .call(yAxisLab, innerHeight/2, "for", 63, .7)
-      .call(yAxisLab, innerHeight/2, title1, 80, .7)
+      .call(yAxisLab, innerHeight/2, title[0], 80, .7)
       .call(yAxisLab, innerHeight-40, "more →", 60, .7)
       .call(yAxisLab, innerHeight-40, "frequent", 75, .7)
       .call(yAxisLab, 40, "← less", 60, .7)
@@ -252,19 +256,6 @@ function filter_contours(tmpcontours, Ninset, maxlog10) {
 return out
 }
 
-
-function alpha_norm_type2(x1, x2, alpha) {
-  if (alpha == 0) {
-    return Math.abs(Math.log(x1 / x2));
-  } else if (alpha === Infinity) {
-    return x1 === x2 ? 0 : Math.max(x1, x2);
-  } else {
-        const prefactor = (alpha + 1) / alpha;
-        const power = 1 / (alpha + 1);
-        return prefactor * Math.abs(Math.pow(x1, alpha) - Math.pow(x2, alpha)) ** power;
-  }
-}
-
 function make_grid(Ninset, tmpr1, tmpr2, alpha, divnorm) {
   // No matrix in js :(
   // we could try to do like in the original d3.contour, where they do
@@ -293,7 +284,6 @@ function make_grid(Ninset, tmpr1, tmpr2, alpha, divnorm) {
 
   return deltamatrix;
 };
-
 
 function get_contours(alpha, maxlog10, divnorm) {
   // only for alpha != 0 and alpha != Infinity
@@ -331,7 +321,6 @@ function get_contours(alpha, maxlog10, divnorm) {
   
 }
 
-
 function chosen_types(dat, ncells) {
   const cumbin = d3.range(0, ncells, 1.5)
   const relevant_types = []
@@ -351,17 +340,4 @@ function chosen_types(dat, ncells) {
   }
   }
   return relevant_types
-}
-
-function rin(arr1, arr2) {
-  // Find element arr1 presents in arr2, i.e. arr1 %in% arr2
-  //
-  // examples
-  // A = ["bob", "george", "jesus"]
-  // B = ["bob", "jesus", "terrence"]
-  // rin(A, B)
-  // [true, false, true]
-  return Array.from(arr1, (x) => {
-    return arr2.indexOf(x) == -1 ? false : true
-  })
 }

@@ -3,14 +3,15 @@ import WordShiftChart from './components/wordshift_plot.js';
 import BalanceChart from './components/balance_plot.js';
 import LegendChart from './components/legend_plot.js';
 import * as d3 from 'd3';
-import { combElems, RTD, myDiamond, wordShift_dat, balanceDat } from 'allotaxonometer';
+import { combElems, rank_turbulence_divergence, diamond_count, wordShift_dat, balanceDat } from 'allotaxonometer';
 
 export default async function createAllotaxChart(data_1, data_2, alpha, title1, title2, passed_svg) {
     const me = combElems(data_1, data_2);
-    const rtd = RTD(me, alpha);
+    const rtd = rank_turbulence_divergence(me, alpha);
 
     // Create Data required for charts
-    const dat = myDiamond(me, rtd);
+    
+    const dat = diamond_count(me, rtd);
     const diamond_dat = dat.counts;
     const barData = wordShift_dat(me, dat).slice(0, 30);
 
@@ -22,15 +23,17 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
         ])
     );
 
-    // Plot
+    // CHARTING
+
     DiamondChart(
         diamond_dat,
         alpha,
-        title1,
-        title2,
-        maxlog10,
-        rtd.normalization,
-        {passed_svg: passed_svg.diamond_svg}
+        rtd.normalization,        
+        {   
+            title: [title1, title2],
+            maxlog10: maxlog10,
+            passed_svg: passed_svg.diamond_svg
+        }
     );
 
     WordShiftChart(

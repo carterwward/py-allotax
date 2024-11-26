@@ -16,8 +16,6 @@ export default function BalanceChart(data, {
   xType = d3.scaleLinear, // type of x-scale
   xDomain = [-1, 1], // [xmin, xmax]
   xRange = [marginLeft, width - marginRight], // [left, right]
-  xFormat = '%', // a format specifier string for the x-axis
-  xLabel =  '', // a label for the x-axis
   yPadding = 0.5, // amount of y-range to reserve to separate bars
   yDomain, // an array of (ordinal) y-values
   yRange, // [top, bottom]
@@ -45,9 +43,9 @@ export default function BalanceChart(data, {
     // Construct scales, axes, and formats.
     const xScale = xType(xDomain, xRange);
     const yScale = d3.scaleBand(yDomain, yRange).padding(yPadding);
-    const xAxis = d3.axisTop(xScale).ticks(width / 80, xFormat);
+    const xAxis = d3.axisTop(xScale).ticks(width / 80, '%');
     const yAxis = d3.axisLeft(yScale).tickSize(0).tickPadding(6);
-    const format = xScale.tickFormat(100, xFormat);
+    const format = xScale.tickFormat(100, '%');
   
     // Compute titles.
     if (title === undefined) {
@@ -77,7 +75,7 @@ export default function BalanceChart(data, {
             .attr("y", -10)
             .attr("fill", "currentColor")
             .attr("text-anchor", "center")
-            .text(xLabel));
+            .text(''));
   
     const bar = g.append("g")
       .selectAll("rect")
