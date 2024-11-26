@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
 
-export default function DiamondChart(dat, alpha, title1, title2, maxlog10, divnorm, passed_svg) {
+export default function DiamondChart(dat, alpha, title1, title2, maxlog10, divnorm, {passed_svg} = {}) {
   
   
   const draw_polygon = (g, tri_coords, bg_color) => g
@@ -37,11 +37,9 @@ export default function DiamondChart(dat, alpha, title1, title2, maxlog10, divno
 
   
   // SVG container and transformations
-  //  const svg = d3.create("svg").style("overflow", "visible");
+  if (passed_svg === undefined) passed_svg = d3.create("svg");
 
-  const svg = passed_svg.style("overflow", "visible");
-
-  const g = svg.attr("id", "myGraph")
+  const g = passed_svg.attr("id", "myGraph").style("overflow", "visible")
        .attr('transform', `scale (-1,1) rotate(45) translate(${innerHeight/4},${innerHeight/4})`)
        .attr('height', DiamondHeight)
        .attr('width', DiamondHeight);

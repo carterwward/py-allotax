@@ -30,7 +30,7 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
         title2,
         maxlog10,
         rtd.normalization,
-        passed_svg.diamond_svg
+        {passed_svg: passed_svg.diamond_svg}
     );
 
     WordShiftChart(
@@ -38,15 +38,9 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
         {
             x: d => d.metric,
             y: d => d.type,
-            xFormat: '%',
-            xDomain: [-max_shift * 1.5, max_shift * 1.5], // [xmin, xmax]
-            width: 300,
-            yPadding: 0.2,
-            height: 680,
-            xLabel: '← System 1 · Divergence contribution · System 2 →',
-            colors: ['lightgrey', 'lightblue'],
-        },
-        passed_svg.wordshift_svg
+            xDomain: [-max_shift * 1.5, max_shift * 1.5],
+            passed_svg: passed_svg.wordshift_svg
+        }
     );
 
     BalanceChart(
@@ -54,14 +48,8 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
         {
             x: d => d.frequency,
             y: d => d.y_coord,
-            xFormat: '%',
-            xDomain: [-1, 1],
-            xLabel: '',
-            width: 200,
-            yPadding: 0.5,
-            colors: ['lightgrey', 'lightblue'],
-        },
-        passed_svg.balance_svg
+            passed_svg: passed_svg.balance_svg
+        }
     );
 
     const N_CATEGO = 20;
@@ -73,13 +61,10 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
     LegendChart(
         color,
         {
-            tickSize: 0,
             max_count_log: Math.ceil(
                 Math.log10(d3.max(diamond_dat, d => d.value))
             ) + 1,
-            marginTop: 13,
-            width: 300,
-        },
-        passed_svg.legend_svg
+            passed_svg: passed_svg.legend_svg
+        }
     );
 }

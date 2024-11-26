@@ -8,18 +8,19 @@ export default function WordShiftChart(data, {
   marginRight = 40, // right margin, in pixels
   marginBottom = 10, // bottom margin, in pixels
   marginLeft = 40, // left margin, in pixels
-  width = 640, // outer width of chart, in pixels
-  height, // the outer height of the chart, in pixels
+  width = 300, // outer width of chart, in pixels
+  height = 680, // the outer height of the chart, in pixels
   xType = d3.scaleLinear, // type of x-scale
   xDomain, // [xmin, xmax]
   xRange = [marginLeft, width - marginRight], // [left, right]
-  xFormat, // a format specifier string for the x-axis
-  xLabel, // a label for the x-axis
-  yPadding = 0.5, // amount of y-range to reserve to separate bars
+  xFormat = '%', // a format specifier string for the x-axis
+  xLabel = '← System 1 · Divergence contribution · System 2 →', // a label for the x-axis
+  yPadding = 0.2, // amount of y-range to reserve to separate bars
   yDomain, // an array of (ordinal) y-values
   yRange, // [top, bottom]
-  colors = d3.schemePiYG[3] // [negative, …, positive] colors
-} = {}, passed_svg) { 
+  colors = ['lightgrey', 'lightblue'], // [negative, …, positive] colors
+  passed_svg,
+} = {}) { 
 
 // REMOVE PASSED_SVG
 
@@ -58,11 +59,8 @@ if (title === undefined) {
 
 }
 
-// ADDED 
-// const svg = d3.create("svg")
+if (passed_svg === undefined) passed_svg = d3.create("svg");
 
-// SWAP THOSE LINES
-// const g = svg.attr("id", "wordShift") 
 const g = passed_svg
     .attr("transform", `translate(${marginLeft}, ${marginTop})`)
     .attr("width", width)

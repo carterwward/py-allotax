@@ -11,18 +11,19 @@ export default function BalanceChart(data, {
   marginRight = 40, // right margin, in pixels
   marginBottom = 10, // bottom margin, in pixels
   marginLeft = 40, // left margin, in pixels
-  width = 640, // outer width of chart, in pixels
+  width = 200, // outer width of chart, in pixels
   height, // the outer height of the chart, in pixels
   xType = d3.scaleLinear, // type of x-scale
-  xDomain, // [xmin, xmax]
+  xDomain = [-1, 1], // [xmin, xmax]
   xRange = [marginLeft, width - marginRight], // [left, right]
-  xFormat, // a format specifier string for the x-axis
-  xLabel, // a label for the x-axis
+  xFormat = '%', // a format specifier string for the x-axis
+  xLabel =  '', // a label for the x-axis
   yPadding = 0.5, // amount of y-range to reserve to separate bars
   yDomain, // an array of (ordinal) y-values
   yRange, // [top, bottom]
-  colors = d3.schemePiYG[3] // [negative, …, positive] colors
-  } = {}, passed_svg) {
+  colors =  ['lightgrey', 'lightblue'], // [negative, …, positive] colors
+  passed_svg
+  } = {}) {
     // Compute values.
     const X = d3.map(data, x);
     const Y = d3.map(data, y);
@@ -57,7 +58,8 @@ export default function BalanceChart(data, {
       title = i => T(O[i], i, data);
     }
   
-    // const svg = d3.create("svg")
+    if (passed_svg === undefined) passed_svg = d3.create("svg")
+
     const g = passed_svg  //.append('g')
         .attr("width", width)
         .attr("height", height)
