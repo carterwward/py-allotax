@@ -13,15 +13,18 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
     
     const dat = diamond_count(me, rtd);
     const diamond_dat = dat.counts;
-    const barData = wordShift_dat(me, dat).slice(0, 30);
-
-    const max_shift = d3.max(barData, d => Math.abs(d.metric));
+    
     const maxlog10 = Math.ceil(
         d3.max([
             Math.log10(d3.max(me[0].ranks)),
             Math.log10(d3.max(me[1].ranks)),
         ])
     );
+
+    const max_count_log = Math.ceil(Math.log10(d3.max(diamond_dat, d => d.value))) + 1
+    
+    const barData = wordShift_dat(me, dat).slice(0, 30);
+    const max_shift = d3.max(barData, d => Math.abs(d.metric));
 
     // CHARTING
 
@@ -46,28 +49,13 @@ export default async function createAllotaxChart(data_1, data_2, alpha, title1, 
         }
     );
 
-    BalanceChart(
-        balanceDat(data_1, data_2),
+    BalanceChart(balanceDat(data_1, data_2),
         {
             x: d => d.frequency,
             y: d => d.y_coord,
             passed_svg: passed_svg.balance_svg
         }
     );
-
-    const N_CATEGO = 20;
-    const ramp = d3.range(N_CATEGO).map(i =>
-        d3.rgb(d3.interpolateInferno(i / (N_CATEGO - 1))).hex()
-    );
-    const color = d3.scaleOrdinal(d3.range(N_CATEGO), ramp);
-
-    LegendChart(
-        color,
-        {
-            max_count_log: Math.ceil(
-                Math.log10(d3.max(diamond_dat, d => d.value))
-            ) + 1,
-            passed_svg: passed_svg.legend_svg
-        }
-    );
+    
+    LegendChart(max_count_log, {passed_svg: passed_svg.legend_svg});
 }

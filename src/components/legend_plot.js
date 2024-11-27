@@ -1,15 +1,21 @@
 import * as d3 from "d3";
 
-export default function myLegend(color, {
+export default function myLegend(max_count_log, {
   tickSize = 0,
-  max_count_log = 4,
   width = 300, 
   height = 44 + tickSize,
   marginTop = 13,
   marginBottom = 16 + tickSize,
   marginLeft = 0,
+  N_CATEGO = 20,
   passed_svg,
   } = {}) {
+
+    const ramp = d3.range(N_CATEGO).map(i =>
+          d3.rgb(d3.interpolateInferno(i / (N_CATEGO - 1))).hex()
+    );
+    const color = d3.scaleOrdinal(d3.range(N_CATEGO), ramp);
+
     
     if (passed_svg === undefined) passed_svg = d3.create("svg")
   

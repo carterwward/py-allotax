@@ -2,7 +2,7 @@
   "type": "module",
   "dependencies": {
     "@ungap/structured-clone": "^1.2.0",
-    "allotaxonometer": "github:jstonge/allotaxonometer#jso-contours",
+    "allotaxonometer": "^1.1.18",
     "canvas": "^2.11.2",
     "d3": "^7.9.0",
     "ds": "^2.0.2",
