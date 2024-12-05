@@ -53,6 +53,27 @@ Verify this test against `output_charts/sample.pdf`.
     generate_svg("convert/boys_2022.json", "convert/boys_2023.json", "output_charts/test.pdf", "0.17")
     ```
 
+
+To get help, you can run the following `python generate_svg.py --help`. This is going to show the following:
+```sh
+usage: generate_svg.py [-h] [--desired_format {pdf,html}] json_file_1 json_file_2 output_file alpha title1 title2 
+                                                                                                                  
+Generate allotaxonometer plot.                                                                                    
+                                                                                                                  
+positional arguments:                                                                                             
+  json_file_1           Path to the first json data file.                                                         
+  json_file_2           Path to the second json data file.                                                        
+  output_file           Path to save the output pdf file.                                                         
+  alpha                 Alpha value.                                                                              
+  title1                Title system 1                                                                            
+  title2                Title system 2.                                                                           
+                                                                                                                  
+options:                                                                                                          
+  -h, --help            show this help message and exit                                                           
+  --desired_format {pdf,html}                                                                                     
+                        Desired output format (default: pdf).
+````
+=======
 ## Resources
 - [Allotaxonometer](https://github.com/jstonge/allotaxonometer)
 - [Allotaxonometer web app](https://allotaxp.vercel.app/)

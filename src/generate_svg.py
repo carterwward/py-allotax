@@ -1,5 +1,4 @@
 """Functions to generate allotaxonometer through Python.
-
 Notes:
 As a test, run in terminal:
 python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17"
@@ -21,15 +20,18 @@ def generate_svg(
     json_file_2: str,
     output_file: str,
     alpha: str,
+    title1: str, 
+    title2: str,
     desired_format: str = "pdf",
 ) -> None:
     """Generate static allotaxonometer plot using d3.js.
-
     Args:
         json_file_1: Path to the first json data file.
         json_file_1: Path to the second json data file.
         output_file: Path to save the output pdf file.
         alpha: Alpha value for allotaxChart.
+        title1: Title for System 1.
+        title2: Title for System 2.
         desired_format (optional): Desired output format (default: pdf). Provide
         "html" to exit once html file is saved.
     Notes:
@@ -48,7 +50,9 @@ def generate_svg(
         file.write(f"const data1 = {json.dumps(data1_json)};\n")
         file.write(f"const data2 = {json.dumps(data2_json)};\n")
         file.write(f"const alpha = {alpha};\n")
-        file.write("module.exports = { data1, data2, alpha };")
+        file.write(f"const title1 = \"{title1}\";\n")
+        file.write(f"const title2 = \"{title2}\";\n")
+        file.write("module.exports = { data1, data2, alpha, title1, title2 };")
 
     # Command to run the JavaScript file using Node.js
     command = ["node", "generate_svg_minimum.js", temp_file_path]
@@ -87,6 +91,8 @@ if __name__ == "__main__":
         "output_file", type=str, help="Path to save the output pdf file."
     )
     parser.add_argument("alpha", type=str, help="Alpha value.")
+    parser.add_argument("title1", type=str, help="Title system 1")
+    parser.add_argument("title2", type=str, help="Title system 2.")
 
     # Optional argument
     parser.add_argument(
@@ -104,5 +110,7 @@ if __name__ == "__main__":
         args.json_file_2,
         args.output_file,
         args.alpha,
+        args.title1,
+        args.title2,
         args.desired_format,
     )

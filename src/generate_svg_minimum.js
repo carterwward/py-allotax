@@ -1,6 +1,6 @@
-const fs = require('fs');
-const { JSDOM } = require('jsdom');
-const { createAllotaxChart } = require('./AllotaxChart.js');
+import fs from 'fs';
+import { JSDOM } from 'jsdom';
+import createAllotaxChart from './AllotaxChart.js';
 
 (async () => {
   // Dynamically import d3
@@ -18,19 +18,20 @@ const { createAllotaxChart } = require('./AllotaxChart.js');
   // Accept the path to the temporary file from the command line arguments
   const tempFilePath = process.argv[2];
   // Use require to load the JavaScript module
-  const { data1, data2, alpha } = require(tempFilePath);
+  const tempData = await import(tempFilePath);
+  const { data1, data2, alpha, title1, title2 } = tempData;
   
   // Create a D3.js SVG visualization for each plot
-  const diamond_svg = d3.select(".diamond_wordshift #diamondplot svg");
-  const wordshift_svg = d3.select(".diamond_wordshift #wordshift svg");
-  const legend_svg = d3.select(".legend_balance #legend svg");
-  const balance_svg = d3.select(".legend_balance #balance svg");
+  const diamond_svg = d3.select("#diamondplot svg");
+  const legend_svg = d3.select("#legend svg");
+  const balance_svg = d3.select("#balance svg");
+  const wordshift_svg = d3.select("#wordshift svg");
 
-  d3.select("#title1").text("Title 1");
-  d3.select("#title2").text("Title 2");
+  d3.select("#title1").text(title1);
+  d3.select("#title2").text(title2);
 
   // Create the allotaxChart instance with the provided data and arguments
-  await createAllotaxChart(data1, data2, alpha, { diamond_svg, wordshift_svg, legend_svg, balance_svg });
+  await createAllotaxChart(data1, data2, alpha, title1, title2, { diamond_svg, wordshift_svg, legend_svg, balance_svg });
 
   // Serialize the SVG to a string (other methods don't provide full HTML)
   const svgString = dom.serialize();
