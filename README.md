@@ -6,7 +6,7 @@ Table of contents:
 - [Installation steps](#installation-steps)
 - [Usage instructions](#usage-instructions)
 - [Frequent questions or issues](#frequent-questions-or-issues)
-- [Rep structure notes](#repo-structure-notes)
+- [Repo structure notes](#repo-structure-notes)
 - [Resources](#resources)
 
 
@@ -131,7 +131,7 @@ Users accessing these tools is our primary goal, so feel free to contact us by s
 
 
 ## Repo structure notes
-- inside `src`:
+- Inside `src`:
     - `generate_svg.py` is the main script to generate the pdf. You can run this from command line or in a notebook.
 - `raw_requirements.txt` contains the raw install requirements for the project which will eventually be used for packaging.
 - Once you set up your ecosystem, you will see `node_modules/`, which will contain the `npm` packages.
@@ -139,6 +139,6 @@ Users accessing these tools is our primary goal, so feel free to contact us by s
 
 ## Resources
 
-- [Allotaxonometer](https://github.com/jstonge/allotaxonometer)
+- [Allotaxonometer main package](https://github.com/jstonge/allotaxonometer)
 - [Allotaxonometer web app](https://allotax.vercel.app/)
 - The work and paper leading to these tools is [here](https://doi.org/10.1140/epjds/s13688-023-00400-x).
