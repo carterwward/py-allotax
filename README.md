@@ -115,7 +115,7 @@ I am receiving this error: `AttributeError: 'ChromiumRemoteConnection' object ha
 - One of secondary dependencies is `selenium`, and it seems to break if the version is higher than 4.25.0. Run `pip3 install selenium==4.25.0`.
 
 I am receiving an `npm` error regarding `canvas`, `pixman`, or other packages I do not recognize.
-- You may need `canvas` and its dependencies. Please follow this guide to installing it based on your OS: https://www.npmjs.com/package/canvas#compiling
+- You may need `canvas` and its dependencies. Please follow [this guide](https://www.npmjs.com/package/canvas#compiling) to installing it based on your OS.
 
 Other packages are erring out or not installing.
 - We will eventually package this repo and streamline installation. Until then, see `raw_requirements.txt` for versions and manually install the required versions (`npm list` and `pip list` will tell you package versions).
@@ -130,7 +130,7 @@ Users accessing these tools is our primary goal, so feel free to contact us by s
 3. The exact error message(s).
 
 
-## Rep structure notes
+## Repo structure notes
 - inside `src`:
     - `generate_svg.py` is the main script to generate the pdf. You can run this from command line or in a notebook.
 - `raw_requirements.txt` contains the raw install requirements for the project which will eventually be used for packaging.
