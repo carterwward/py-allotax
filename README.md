@@ -6,7 +6,7 @@ Table of contents:
 - [Installation steps](#installation-steps)
 - [Usage instructions](#usage-instructions)
 - [Frequent questions or issues](#frequent-questions-or-issues)
-- [Structure explanation](#structure-explanation)
+- [Rep structure notes](#repo-structure-notes)
 - [Resources](#resources)
 
 
@@ -130,7 +130,7 @@ Users accessing these tools is our primary goal, so feel free to contact us by s
 3. The exact error message(s).
 
 
-## Structure notes
+## Rep structure notes
 - inside `src`:
     - `generate_svg.py` is the main script to generate the pdf. You can run this from command line or in a notebook.
 - `raw_requirements.txt` contains the raw install requirements for the project which will eventually be used for packaging.
