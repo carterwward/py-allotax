@@ -1,10 +1,10 @@
 """Functions to generate allotaxonometer through Python.
 Notes:
 As a test, run in terminal:
-python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17"
+python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17" "Boys 2022" "Boys 2023"
 
 If you only want the html file, not the pdf, run:
-python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17" --desired_format "html"
+python3 generate_svg.py convert/boys_2022.json convert/boys_2023.json output_charts/test.pdf "0.17" "Boys 2022" "Boys 2023" --desired_format "html"
 """
 
 import argparse
@@ -20,7 +20,7 @@ def generate_svg(
     json_file_2: str,
     output_file: str,
     alpha: str,
-    title1: str, 
+    title1: str,
     title2: str,
     desired_format: str = "pdf",
 ) -> None:
@@ -91,8 +91,8 @@ if __name__ == "__main__":
         "output_file", type=str, help="Path to save the output pdf file."
     )
     parser.add_argument("alpha", type=str, help="Alpha value.")
-    parser.add_argument("title1", type=str, help="Title system 1")
-    parser.add_argument("title2", type=str, help="Title system 2.")
+    parser.add_argument("title1", type=str, help="Title for system 1")
+    parser.add_argument("title2", type=str, help="Title for system 2.")
 
     # Optional argument
     parser.add_argument(
