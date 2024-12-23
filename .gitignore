@@ -6,3 +6,4 @@ package-lock.json
 *convert/
 __pycache__/
 *.ipynb_checkpoints/
+.pdm-python

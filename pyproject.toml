@@ -1,0 +1,19 @@
+[project]
+name = "py-allotax"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Computational StoryLab", email = "None"},
+]
+dependencies = ["pandas>=2.2.1", "pyhtml2pdf>=0.0.7", "selenium==4.25.0"]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "None"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
