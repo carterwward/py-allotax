@@ -8,3 +8,6 @@ __pycache__/
 *.ipynb_checkpoints/
 .pdm-python
 dist/*
+.vscode
+tests/test.html
+tests/test.pdf
