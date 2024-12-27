@@ -10,7 +10,7 @@ import createAllotaxChart from './AllotaxChart.js';
   const dom = new JSDOM();
   // Load your HTML file
   //index and index2 are the same, index2 is just cleaner.
-  const htmlContent = fs.readFileSync('index.html', 'utf8');
+  const htmlContent = fs.readFileSync(process.argv[3], 'utf8');
   dom.window.document.body.innerHTML = htmlContent;
   const { document } = dom.window;
   global.document = document;  // Make document globally available
