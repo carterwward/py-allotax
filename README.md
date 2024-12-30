@@ -85,6 +85,8 @@ If working in a python notebook or scripting, you can install the package and us
     generate_svg(data_path1, data_path2, "test.pdf", "0.17", "Boys 2022", "Boys 2023")
     ```
 
+5. Verify the result.
+
 ### CLI
 1. Verify your data is in the required format (`.json`) by seeing json examples in `example_data/`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
