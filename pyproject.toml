@@ -1,7 +1,7 @@
 [project]
 name = "py-allotax"
 version = "0.1.0"
-description = "Default template for PDM package"
+description = "Python implementation of allotaxonometer to produce static graphs."
 authors = [
     {name = "Computational StoryLab", email = "None"},
 ]
