@@ -1,6 +1,14 @@
-FROM nikolaik/python-nodejs:python3.11-nodejs22-slim
+FROM docker.io/nikolaik/python-nodejs:python3.11-nodejs22
 # Project Setup
-RUN apt-get update && apt-get install -y curl build-essential
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg-dev \
+    libgif-dev \
+    librsvg2-dev \
+    pkg-config
 WORKDIR app
 COPY ./pyproject.toml ./pdm.lock ./README.md ./
 COPY  ./src ./src
