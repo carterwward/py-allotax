@@ -87,7 +87,7 @@ If working in a python notebook or scripting, you can install the package and us
 
 5. Verify the result.
 
-### CLI
+### Command Line
 1. Verify your data is in the required format (`.json`) by seeing json examples in `example_data/`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
     - The method `utils.convert_csv_data` exists to convert your data from `.csv` to `.json` if needed--see `src/py_allotax/examples.ipynb`.
