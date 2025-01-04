@@ -3,7 +3,7 @@ name = "py-allotax"
 version = "0.1.0"
 description = "Python implementation of allotaxonometer to produce static graphs."
 authors = [
-    {name = "Computational StoryLab", email = "None"},
+    {name = "Computational StoryLab", email = "peter.dodds@uvm.edu"},
 ]
 dependencies = ["pandas>=2.2.1", "pyhtml2pdf>=0.0.7", "selenium==4.25.0"]
 requires-python = ">=3.11"
