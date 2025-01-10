@@ -18,7 +18,7 @@ RUN pip install pdm
 RUN pdm sync
 
 # Install JS Deps in src
-RUN cd src/py_allotax && npm install allotaxonometer
+RUN cd src/py_allotax && npm install
 # Build package and move to local
 RUN pdm build
 
