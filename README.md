@@ -3,7 +3,7 @@
 The `py-allotax` implements a python interface to the `allotaxonometer` library. The tool here provides a way for users to input data and arguments and receive back a saved plot! The tool is designed to be used in a command line or in a python notebook in a few lines of code (see usage instructions at the bottom).
 
 Table of contents:
-- [Package Build](#package-build)
+- [Installation](#installation)
 - [Usage instructions](#usage-instructions)
 - [Developer Notes](#developer-notes)
 - [Frequent questions or issues](#frequent-questions-or-issues)
@@ -12,9 +12,9 @@ Table of contents:
 
 
 
-## Installation steps
+## Installation
 
-1. Install `python3.11` or greater.
+1. Requires `python3.11` or greater.
 
 1. If JavaScript tool installs are needed (never used or installed `npm`, `nvm`, `node`):
     1. Here are the recommended [steps to install `nvm`](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating). `nvm` is a node version manager that streamlines installing the other 2.
@@ -23,71 +23,30 @@ Table of contents:
     ```bash
     nvm install --lts
     ```
-1. Ensure docker or podman is installed on your machine.
 1. One package depends on having Chrome (brower) or Chromium (browser driver) installed. **If you have Chrome installed, you can skip this step**. Otherwise, install Chrome or Chromium.
 
-## Package Build
-Clone this repo and install the requirements:
-
-```bash
-git clone https://github.com/compstorylab/py-allotax.git &&
-cd py-allotax &&
-./scripts/build.sh
-```
-
-You should see a `.whl` file in the newly created `dist` directory.
+1. ```bash
+    pip install py-allotax
+    ```
 
 ## Usage instructions
 
-### Scripting
-If working in a python notebook or scripting, you can install the package and use the function directly:
+### Package
+If working in a python notebook or scripting, you can install the package and use the function directly. Example data can be found in the `example_data` directory. [boys 2022](example_data/boys_2022.csv) and [boys 2023](example_data/boys_2023.json) are the examples used below.
 
-1. Create a new project or directory outside the `py-allotax` repo.
-2. from `py-allotax`
-    ```bash
-    mkdir ../<new repo name> &&
-    cd ../<new repo name>
-    ```
-3. Create a new project environment:
-    -   ```bash
-        python3.11 -m venv .venv
-        ```
+```python
+import os
+from py_allotax import generate_svg
+data_path1 = os.path.join("example_data", "boys_2022.json")
+data_path2 = os.path.join("example_data", "boys_2023.json")
+generate_svg(data_path1, data_path2, "test.pdf", "0.17", "Boys 2022", "Boys 2023")
+```
 
-        or
+If using the example data, you can check your result against the examples provided [here](example_charts)
 
-    -   ```bash
-        pdm init
-        ```
-4. Make sure the environment is activated.
+### CLI
 
-    if you are not using pdm:
-    -   ```bash
-        source .venv/bin/activate
-        ```
-
-3. Install generated package with pdm or pip:
-    -   ```bash
-        pip install ../<path to py-allotax>/dist/py_allotax-<version number>-py3-none-any.whl
-        ```
-
-        or
-
-    -   ```bash
-        pdm add ../<path to py-allotax>/dist/py_allotax-<version number>-py3-none-any.whl
-        ```
-
-4. Test to make sure package is working properly
-    ```python
-    import os
-    from py_allotax import generate_svg
-    data_path1 = os.path.join(<path to py-allotax>, "example_data", "boys_2022.json")
-    data_path2 = os.path.join(<path to py-allotax>, "example_data", "boys_2023.json")
-    generate_svg(data_path1, data_path2, "test.pdf", "0.17", "Boys 2022", "Boys 2023")
-    ```
-
-5. Verify the result.
-
-### Command Line
+1. Clone the GitHub repository.
 1. Verify your data is in the required format (`.json`) by seeing json examples in `example_data/`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
     - The method `utils.convert_csv_data` exists to convert your data from `.csv` to `.json` if needed--see `src/py_allotax/examples.ipynb`.
@@ -118,15 +77,14 @@ options:
 
 ## Developer Notes
 ### Dependency Manager
-[pdm](https://pdm-project.org/latest/#installation) is required for the build and package and so it must be installed for testing.
+[pdm](https://pdm-project.org/latest/#installation) is required for the build and testing.
 
 ### Setup
 Once `pdm` is installed, run:
 ```
 pdm sync
 ```
-to install everything needed for development.
-
+to install all python dependencies.
 
 ### Testing
 
@@ -136,6 +94,16 @@ pdm run pytest
 ```
 This will execute the tests written in the `tests` dir.
 
+### Package Build
+Clone this repo and install the requirements:
+
+```bash
+git clone https://github.com/carterwward/py-allotax.git &&
+cd py-allotax &&
+./scripts/build.sh
+```
+
+You should see a `.whl` file in the newly created `dist` directory.
 
 ## Frequent questions or issues
 
