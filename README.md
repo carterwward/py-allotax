@@ -153,7 +153,7 @@ I am receiving an `npm` error regarding `canvas`, `pixman`, or other packages I 
 - You may need `canvas` and its dependencies. Please follow [this guide](https://www.npmjs.com/package/canvas#compiling) to installing it based on your OS.
 
 Other packages are erring out or not installing.
-- We will eventually package this repo and streamline installation. Until then, see `raw_requirements.txt` for versions and manually install the required versions (`npm list` and `pip list` will tell you package versions).
+- We will eventually package this repo and streamline installation.
 
 
 <br>
@@ -168,7 +168,7 @@ Users accessing these tools is our primary goal, so feel free to contact us by s
 ## Repo structure notes
 - Inside `src`:
     - `generate_svg.py` is the main script to generate the pdf. You can run this from command line or in a notebook.
-- `raw_requirements.txt` contains the raw install requirements for the project which will eventually be used for packaging.
+- Outside `src`: you can download example data and charts and a notebook to run pre-constructed examples that use the library.
 - Once you set up your ecosystem, you will see `node_modules/`, which will contain the `npm` packages.
 
 
