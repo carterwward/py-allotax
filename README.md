@@ -33,7 +33,7 @@ Table of contents:
 ## Usage instructions
 
 ### Package
-If working in a python notebook or scripting, you can install the package and use the function directly. Example data can be found in the `example_data` directory. [boys 2022](example_data/boys_2022.csv) and [boys 2023](example_data/boys_2023.json) are the examples used below.
+If working in a python notebook or script, you can install the package and use the function directly. Example data can be downloaded from the `example_data` directory to run the example below and those found in the `examples.ipynb`. [boys 2022](example_data/boys_2022.csv) and [boys 2023](example_data/boys_2023.json) are the examples used below.
 
 ```python
 import os
