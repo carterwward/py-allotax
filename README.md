@@ -43,7 +43,8 @@ data_path2 = os.path.join("example_data", "boys_2023.json")
 generate_svg(data_path1, data_path2, "test.pdf", "0.17", "Boys 2022", "Boys 2023")
 ```
 
-If using the example data, you can check your result against the examples provided [here](example_charts)
+If running the example, you can check your result against the [example output](example_charts).
+
 
 ### CLI
 
