@@ -11,8 +11,9 @@ import argparse
 import json
 import subprocess
 import tempfile
+from importlib import resources
 
-from utils import convert_html_to_pdf, verify_input_data
+from py_allotax.utils import convert_html_to_pdf, verify_input_data
 
 
 def generate_svg(
@@ -55,7 +56,9 @@ def generate_svg(
         file.write("module.exports = { data1, data2, alpha, title1, title2 };")
 
     # Command to run the JavaScript file using Node.js
-    command = ["node", "generate_svg_minimum.js", temp_file_path]
+    js_file_path = resources.files('py_allotax').joinpath('generate_svg_minimum.js')
+    index_file_path = resources.files("py_allotax").joinpath("index.html")
+    command = ["node", str(js_file_path), temp_file_path, str(index_file_path)]
 
     # Run the JS file and capture the output
     result = subprocess.run(command, capture_output=True, text=True)
@@ -74,7 +77,7 @@ def generate_svg(
         # Convert the HTML to PDF
         convert_html_to_pdf("pyhtml2pdf", f"{file_name}.html", output_file)
     else:
-        print(f"Error: {result.stderr}")
+        raise Exception(f"Error in Graph Generation: {result.stderr}")
 
 
 if __name__ == "__main__":
