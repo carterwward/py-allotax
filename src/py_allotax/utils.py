@@ -69,7 +69,7 @@ def convert_csv_data(desired_format: str, path1: str, path2: str) -> None:
         f_type = extensions[desired_format]
         # Re-use filename without extension (strip .csv)
         f_name = os.path.basename(path).rsplit(".", 1)[0]
-        with open(f"data/{f_name}{f_type}", "w", encoding="utf-8") as f:
+        with open(f"{f_name}{f_type}", "w", encoding="utf-8") as f:
             if desired_format == "js":
                 f.write(f"export const data = {json.dumps(data)};")
             else:
@@ -93,9 +93,9 @@ def convert_js_data(desired_format: str, path1: str, path2: str) -> None:
             data = json.loads(strip_export_statement(js_content))
             if desired_format == "csv":
                 df = pd.DataFrame(data)
-                df.to_csv(f"data/{f_name}.csv", index=False)
+                df.to_csv(f"{f_name}.csv", index=False)
             else:
-                with open(f"data/{f_name}.json", "w", encoding="utf-8") as f:
+                with open(f"{f_name}.json", "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False, indent=4)
 
 
