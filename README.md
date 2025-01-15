@@ -27,7 +27,7 @@ Table of contents:
 
 1. Activate your desired python environment then
 ```bash
-    pip install py-allotax
+    pip3 install py-allotax
     ```
 
 ## Usage instructions
