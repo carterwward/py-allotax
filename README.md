@@ -51,7 +51,7 @@ If running the example, you can check your result against the [example output](e
 1. Clone the GitHub repository.
 1. Verify your data is in the required format (`.json`) by seeing json examples in `example_data/`.
     - See helper functions in `utils` to convert among `csv`, `json`, and `js` formats.
-    - The method `utils.convert_csv_data` exists to convert your data from `.csv` to `.json` if needed--see `src/py_allotax/examples.ipynb`.
+    - The method `utils.convert_csv_data` exists to convert your data from `.csv` to `.json` if needed--see `examples.ipynb`.
 1. Add your 2 system's files. You need 2 `data.json` files, one for each system.
 
 Verify this test against `example_charts/test.pdf`.
