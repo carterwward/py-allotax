@@ -99,7 +99,7 @@ This will execute the tests written in the `tests` dir.
 Clone this repo and install the requirements:
 
 ```bash
-git clone https://github.com/carterwward/py-allotax.git &&
+git clone https://github.com/compstorylab/py-allotax.git &&
 cd py-allotax &&
 ./scripts/build.sh
 ```
