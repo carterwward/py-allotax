@@ -36,7 +36,7 @@ If working in a python notebook or scripting, you can install the package and us
 
 ```python
 import os
-from py_allotax import generate_svg
+from py_allotax.generate_svg import generate_svg
 data_path1 = os.path.join("example_data", "boys_2022.json")
 data_path2 = os.path.join("example_data", "boys_2023.json")
 generate_svg(data_path1, data_path2, "test.pdf", "0.17", "Boys 2022", "Boys 2023")
